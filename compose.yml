@@ -1,0 +1,13 @@
+services:
+  postgres:
+#   Use the latest version of the official PostgreSQL image
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=runnerz'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_USER=bryan'
+    ports:
+#    Map port 5432 on the host machine to port 5432 on the PostgreSQL container
+#    This allows you to connect to the PostgreSQL database running
+#    inside the container using 'localhost:5432' on the host machine
+      - '5432:5432'
