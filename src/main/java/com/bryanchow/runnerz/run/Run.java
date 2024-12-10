@@ -2,10 +2,15 @@ package com.bryanchow.runnerz.run;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 
 import java.time.LocalDateTime;
 
 public record Run(
+        // Marks this field as the identifier for the entity.
+        // It will be used as the primary key in the database.
+        @Id
         Integer id,
         @NotEmpty
         String title,
@@ -13,7 +18,11 @@ public record Run(
         LocalDateTime completedOn,
         @Positive
         Integer kilometers,
-        Location location
+        Location location,
+        // Marks this field as the version field for optimistic locking.
+        // It will be used to manage concurrent updates to the entity.
+        @Version
+        Integer version
 ) {
 
     public Run {
