@@ -9,10 +9,17 @@ import org.springframework.util.Assert;
 import java.util.List;
 import java.util.Optional;
 
+// This annotation indicates that the class is a repository,
+// which is used to encapsulate the logic required to access data sources.
 @Repository
 public class JdbcClientRunRepository {
 
     private static final Logger log = LoggerFactory.getLogger(JdbcClientRunRepository.class);
+
+    // The JdbcClient object is a simple JDBC client that
+    // provides a fluent API for interacting with a database.
+    // It offers methods for setting SQL parameters, executing the SQL
+    // and mapping the results to objects.
     private final JdbcClient jdbcClient;
 
     public JdbcClientRunRepository(JdbcClient jdbcClient) {
@@ -28,7 +35,7 @@ public class JdbcClientRunRepository {
 
     public Optional<Run> findById(Integer id) {
         // Retrieve a run by its ID and map the result to an Optional<Run> object
-        return jdbcClient.sql("SELECT id, title, started_on, completed_on, kilometers, location FROM run WHERE id = :id")
+        return jdbcClient.sql("SELECT id, title, started_on, completed_on, kilometers, location, version FROM run WHERE id = :id")
                 .param("id", id)
                 .query(Run.class)
                 .optional();
