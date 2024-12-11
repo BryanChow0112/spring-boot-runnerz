@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +22,7 @@ public class InMemoryRunRepository {
 
     public Optional<Run> findById(Integer id) {
         return Optional.ofNullable(runs.stream()
-                .filter(run -> run.id() == id)
+                .filter(run -> Objects.equals(run.id(), id))
                 .findFirst()
                 .orElseThrow(RunNotFoundException::new));
     }
@@ -58,7 +57,7 @@ public class InMemoryRunRepository {
     }
 
     public void saveAll(List<Run> runs) {
-        runs.stream().forEach(run -> create(run));
+        runs.forEach(this::create);
     }
 
     public List<Run> findAllByLocation(String location) {
@@ -67,20 +66,19 @@ public class InMemoryRunRepository {
                 .toList();
     }
 
-
     @PostConstruct
     private void init() {
         runs.add(new Run(1,
                 "Monday Morning Run",
                 LocalDateTime.now(),
-                LocalDateTime.now().plus(30, ChronoUnit.MINUTES),
+                LocalDateTime.now().plusMinutes(30),
                 3,
                 Location.INDOOR, null));
 
         runs.add(new Run(2,
                 "Wednesday Evening Run",
                 LocalDateTime.now(),
-                LocalDateTime.now().plus(60, ChronoUnit.MINUTES),
+                LocalDateTime.now().plusMinutes(60),
                 6,
                 Location.INDOOR, null));
     }

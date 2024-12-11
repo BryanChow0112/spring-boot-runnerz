@@ -67,7 +67,7 @@ public class JdbcClientRunRepository {
                 .param("id", id)
                 .update();
 
-        // Assert that one row was affected by the delete, otherwise throw an error
+        // Assert that one row was affected by the delete operation, otherwise throw an error
         Assert.state(updated == 1, "Failed to delete run " + id);
     }
 
@@ -78,7 +78,7 @@ public class JdbcClientRunRepository {
 
     public void saveAll(List<Run> runs) {
         // Iterate through the list of runs and create each one in the database
-        runs.stream().forEach(this::create);
+        runs.forEach(this::create);
     }
 
     public List<Run> findByLocation(String location) {
