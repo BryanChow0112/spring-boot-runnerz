@@ -31,11 +31,13 @@ Runnerz is a simple web application built using Spring Boot 3, created to apply 
 
 ## API Endpoints
 
-- GET /api/runs: Retrieve all runs.
-- GET /api/runs/{id}: Retrieve a specific run by ID.
-- POST /api/runs: Create a new run.
-- PUT /api/runs/{id}: Update an existing run.
-- DELETE /api/runs/{id}: Delete a run.
+| HTTP Method | Endpoint        | Description                     |
+|-------------|-----------------|---------------------------------|
+| `GET`       | `/api/runs`     | Retrieve all runs               |
+| `GET`       | `/api/runs/{id}` | Retrieve a specific run by ID   |
+| `POST`      | `/api/runs`     | Create a new run                |
+| `PUT`       | `/api/runs/{id}` | Update an existing run          |
+| `DELETE`    | `/api/runs/{id}` | Delete a run                    |
 
 
 ## Useful Resources
